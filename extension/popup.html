@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: Arial, sans-serif; font-size: 13px; width: 290px; padding: 12px; }
+  label { display: block; margin: 7px 0; }
+  button { background: #B71C1C; color: #fff; border: 0; padding: 10px; border-radius: 4px; font-size: 14px; cursor: pointer; width: 100%; margin-top: 10px; }
+  button:disabled { opacity: .5; }
+  #msg { margin-top: 10px; }
+</style>
+</head>
+<body>
+<label>Couleur des titres
+  <select id="theme"><option value="rouge">Rouge</option><option value="noir">Noir</option><option value="bleu">Bleu nuit</option></select>
+</label>
+<label><input type="checkbox" id="detectHeadings"> Détecter les titres</label>
+<label><input type="checkbox" id="stripMarkdown"> Retirer les symboles Markdown</label>
+<label><input type="checkbox" id="boldLabels"> Mots-clés des puces en gras</label>
+<label><input type="checkbox" id="styleSources"> Sources en petit</label>
+<label><input type="checkbox" id="styleCitations"> Renvois [1] en exposant</label>
+<label><input type="checkbox" id="spacing"> Interligne et espacement</label>
+<button id="go">Rendre lisible</button>
+<div id="msg"></div>
+<script src="popup.js"></script>
+</body>
+</html>

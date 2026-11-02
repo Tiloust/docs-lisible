@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Docs Lisible",
+  "version": "1.0.0",
+  "description": "Rend un Google Doc lisible (titres, puces, sources en petit) sans supprimer un mot.",
+  "permissions": ["identity", "storage"],
+  "host_permissions": ["https://docs.google.com/document/*", "https://docs.googleapis.com/*"],
+  "oauth2": {
+    "client_id": "VOTRE_CLIENT_ID.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/documents"]
+  },
+  "action": { "default_popup": "popup.html", "default_title": "Rendre lisible" },
+  "background": { "service_worker": "background.js" }
+}

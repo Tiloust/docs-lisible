@@ -1,0 +1,6 @@
+{
+  "name": "docs-lisible",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "test": "node --test core/test/", "sync": "node scripts/sync-core.js" }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base target="_top">
+<style>
+  body { font-family: Arial, sans-serif; font-size: 13px; padding: 12px; }
+  label { display: block; margin: 8px 0; }
+  button { background: #B71C1C; color: #fff; border: 0; padding: 10px 14px; border-radius: 4px; font-size: 14px; cursor: pointer; width: 100%; margin-top: 12px; }
+  button:disabled { opacity: .5; }
+  #msg { margin-top: 12px; }
+</style>
+</head>
+<body>
+<label>Couleur des titres
+  <select id="theme"><option value="rouge">Rouge</option><option value="noir">Noir</option><option value="bleu">Bleu nuit</option></select>
+</label>
+<label><input type="checkbox" id="detectHeadings"> Détecter les titres (I., A., MAJUSCULES…)</label>
+<label><input type="checkbox" id="stripMarkdown"> Retirer les symboles Markdown (#, -, **)</label>
+<label><input type="checkbox" id="boldLabels"> Mots-clés des puces en gras</label>
+<label><input type="checkbox" id="styleSources"> Sources en petit</label>
+<label><input type="checkbox" id="styleCitations"> Renvois [1] en exposant</label>
+<label><input type="checkbox" id="spacing"> Interligne et espacement</label>
+<button id="go">Rendre lisible</button>
+<div id="msg"></div>
+<script>
+  var IDS = ['detectHeadings', 'stripMarkdown', 'boldLabels', 'styleSources', 'styleCitations', 'spacing'];
+  google.script.run.withSuccessHandler(function (o) {
+    document.getElementById('theme').value = o.theme;
+    IDS.forEach(function (k) { document.getElementById(k).checked = !!o[k]; });
+  }).getOptions();
+  document.getElementById('go').onclick = function () {
+    var o = { theme: document.getElementById('theme').value };
+    IDS.forEach(function (k) { o[k] = document.getElementById(k).checked; });
+    var b = this, m = document.getElementById('msg');
+    b.disabled = true; m.textContent = 'Mise en forme en cours…';
+    google.script.run.withSuccessHandler(function (s) {
+      b.disabled = false;
+      m.textContent = 'Terminé : ' + s.titres + ' titres, ' + s.puces + ' puces, ' + s.sources + ' sources.';
+    }).withFailureHandler(function (e) {
+      b.disabled = false; m.textContent = 'Erreur : ' + e.message;
+    }).applyFormatting(o);
+  };
+</script>
+</body>
+</html>
